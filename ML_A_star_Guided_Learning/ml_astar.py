@@ -105,7 +105,6 @@ def solve(G, source, sink):
 
     start = time.perf_counter()
 
-    # compute heuristics once
     heuristic = precompute_heuristics(G)
 
     path, cost, nodes_expanded, visited = ml_astar_search(

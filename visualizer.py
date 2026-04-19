@@ -4,12 +4,8 @@ import random
 
 
 def visualize_graph(G, path=None, visited=None, title="Graph"):
-
     pos = {}
-
-    # place nodes by stage
     stages = nx.get_node_attributes(G, "stage")
-
     stage_groups = {}
     for node, s in stages.items():
         stage_groups.setdefault(s, []).append(node)
