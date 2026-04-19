@@ -1,219 +1,251 @@
-# Multistage Graph Optimization using Hybrid Dynamic Programming
+# Multistage Graph Optimization using Hybrid DP 🚀
 
-This project explores multiple approaches to solve the **Multistage Graph Shortest Path Problem** and compares their efficiency using classical algorithms, machine learning, and heuristic pruning.
+A complete implementation and comparison of **Dynamic Programming, ML-Guided A*, and Greedy Pruning (C++)** for solving multistage graph optimization problems.
 
-The goal is to demonstrate how **algorithmic optimization and ML-guided search can improve performance when solving large multistage graphs.**
+This project demonstrates both:
+
+* ⚙️ **Algorithmic strength (core DAA concepts)**
+* 🌍 **Real-world usability (city-based routing with UI)**
 
 ---
 
-# Problem Overview
+## 📌 Features
 
-A **multistage graph** is a directed graph where nodes are divided into ordered stages.
+* ✅ Classic **Multistage Graph DP**
+* ✅ **ML-Guided A*** (Random Forest heuristic)
+* ✅ **DP + Greedy Pruning (C++ optimized)**
+* ✅ Performance comparison (time + nodes visited)
+* ✅ Synthetic graph testing (~500 nodes)
+* ✅ Interactive **Streamlit UI with city selection**
+* ✅ Halt-based routing (user-defined intervals)
+* ✅ Graph visualization with path + halts
 
-Edges only exist from stage `i` to stage `i+1`.
+---
 
-The task is to compute the **minimum cost path from a source node to a sink node**.
-
-Example structure:
+## 📁 Project Structure
 
 ```
-Stage 0     Stage 1     Stage 2     Stage 3
-   ●            ●            ●            ●
-    \          / \          /
-     ●        ●   ●        ●
-      \      /     \      /
-       ●            ●
-```
-
-Multistage graphs commonly appear in:
-
-- Dynamic programming problems
-- Scheduling problems
-- Routing and optimization tasks
-
----
-
-# Algorithms Implemented
-
-This project compares **three approaches**:
-
-## 1. Classic Dynamic Programming (Python)
-
-Baseline solution using **backward dynamic programming**.
-
-Features:
-
-- Guarantees optimal solution
-- Explores almost the entire graph
-- Simple and deterministic approach
-
----
-
-## 2. ML-Guided A* Search (Python + Random Forest)
-
-A **Random Forest model** predicts the remaining cost from any node to the sink.
-
-This prediction is used as a **heuristic function in the A* search algorithm**.
-
-Benefits:
-
-- Guides search toward promising nodes
-- Reduces exploration of unnecessary nodes
-- Demonstrates integration of **Machine Learning with algorithm design**
-
----
-
-## 3. Greedy Pruned Dynamic Programming (C++ Optimized)
-
-This optimized solver applies **cost-based pruning**:
-
-Nodes with cost significantly higher than the average cost in a stage are pruned.
-
-Advantages:
-
-- Extremely fast
-- Implemented in **C++ for high performance**
-- Avoids exploring weak candidate nodes
-
----
-
-# Project Structure
-
-```
-Multistage-Graph-Optimization-using-Hybrid-DP
-
+DAA Project/
 │
-├── main.py
-├── visualizer.py
+├── main.py                         # Synthetic graph testing (~500 nodes)
+├── app.py                          # Streamlit UI (city-based routing)
+├── requirements.txt
 │
-├── DP_Classic
-│   └── multistage_dp.py
+├── DP_Classic/
+│   └── multistage_dp.py           # Classic DP solution
 │
-├── ML_A_star_Guided_Learning
-│   ├── ml_astar.py
+├── ML_A_star_Guided_Learning/
 │   ├── dataset_builder.py
 │   ├── train_model.py
-│   └── rf_model.pkl
+│   ├── ml_astar.py                # ML-guided A*
+│   └── rf_model.pkl               # Trained model
 │
-├── dp_greedy.cpp
-├── dp_greedy.exe
+├── dp_greedy.cpp                  # C++ optimized DP + pruning
+├── dp_greedy.exe                  # Compiled executable
 │
 └── README.md
 ```
 
 ---
 
-# Visualization
+## ⚙️ Setup Instructions
 
-The project includes a visualization module that displays:
-
-- The generated multistage graph
-- Nodes explored by ML-guided A*
-- Optimal path from source to sink
-
-Color Legend:
-
-| Color | Meaning |
-|------|--------|
-| Grey | All nodes in the graph |
-| Orange | Nodes explored by ML A* |
-| Red | Optimal shortest path |
-
-This visualization helps illustrate how **different algorithms explore the graph.**
-
----
-
-# Example Output
-
-```
-Synthetic Multistage Graph
-Nodes: 522
-Edges: 19280
-Stages: 15
-
-Algorithm Comparison
-------------------------------------------------------------
-Algorithm                Time (s)       Nodes Visited
-------------------------------------------------------------
-DP Classic               0.011          521/522
-ML Guided A*             6.61           267/522
-DP + Greedy (C++)        0.0006         500/522
-------------------------------------------------------------
-
-Best Algorithm: DP + Greedy (C++)
-```
-
----
-
-# Exploration Efficiency
-
-```
-DP Classic: ~100% of graph explored
-ML Guided A*: ~50% of graph explored
-DP + Greedy (C++): ~96% of graph explored
-```
-
-This demonstrates how **ML-guided search can significantly reduce exploration of the graph.**
-
----
-
-# Technologies Used
-
-- Python
-- C++
-- NetworkX
-- Scikit-learn
-- Matplotlib
-- Heap-based A* search
-- Hybrid algorithm optimization
-
----
-
-# How to Run
-
-Clone the repository:
+### 1️⃣ Install dependencies
 
 ```bash
-git clone https://github.com/VivekMishra5210/Multistage-Graph-Optimization-using-Hybrid-DP.git
+pip install -r requirements.txt
 ```
 
-Move into the project folder:
+---
 
-```bash
-cd Multistage-Graph-Optimization-using-Hybrid-DP
-```
+## ▶️ Running the Project
 
-Run the project:
+---
+
+### 🔹 Option 1: Synthetic Graph (Algorithm Testing)
+
+Runs all algorithms on a generated multistage graph (~500 nodes)
 
 ```bash
 python main.py
 ```
 
-This will:
+✔ Outputs:
 
-1. Generate a synthetic multistage graph
-2. Run all algorithms
-3. Compare performance
-4. Display a graph visualization
-
----
-
-# Key Learning Outcomes
-
-This project demonstrates:
-
-- Dynamic Programming on graphs
-- Heuristic search using A*
-- ML-based cost estimation
-- Hybrid algorithm optimization
-- Cross-language integration (Python + C++)
-- Performance benchmarking
-- Graph visualization techniques
+* Execution time comparison
+* Nodes visited
+* Best performing algorithm
 
 ---
 
-# Author
+### 🔹 Option 2: GUI (Real-world City Routing)
 
-**Vivek Mishra**  
-B.Tech Computer Science  
-IIIT Nagpur
+```bash
+streamlit run app.py
+```
+
+✔ Features:
+
+* Select **source & destination cities**
+* Define **halt distance (km)**
+* Run all algorithms
+* View:
+
+  * Optimal path
+  * Halt locations
+  * Performance comparison
+  * Graph visualization
+
+---
+
+## 🧠 Algorithms Used
+
+### 1. Dynamic Programming (DP)
+
+* Solves multistage graph optimally
+* Works in **backward stage order**
+* Time complexity: **O(E)**
+
+---
+
+### 2. ML-Guided A*
+
+* Uses **Random Forest** to predict remaining cost
+* Heuristic replaces traditional A* heuristic
+* Reduces unnecessary exploration
+
+---
+
+### 3. DP + Greedy Pruning (C++)
+
+* Optimized version of DP
+* Prunes high-cost nodes dynamically
+* Extremely fast due to:
+
+  * C++ execution
+  * Reduced search space
+
+---
+
+## 🤖 Machine Learning Component
+
+Pipeline:
+
+```
+dataset_builder.py → dataset.csv → train_model.py → rf_model.pkl
+```
+
+* Features:
+
+  * stage
+  * out_degree
+  * min_edge_weight
+  * avg_edge_weight
+* Target:
+
+  * Optimal remaining cost (from DP)
+
+Used as heuristic in A*.
+
+---
+
+## ⚡ C++ Integration (IMPORTANT)
+
+The file `dp_greedy.cpp` is compiled into an executable:
+
+```bash
+g++ -O2 -std=c++17 dp_greedy.cpp -o dp_greedy.exe
+```
+
+### How it works:
+
+1. Python creates a graph input file (`graph_input.txt`)
+2. Python calls:
+
+   ```
+   dp_greedy.exe graph_input.txt
+   ```
+3. C++ program:
+
+   * Reads graph
+   * Runs optimized DP + pruning
+   * Outputs:
+
+     ```
+     time nodes_processed nodes_pruned
+     ```
+4. Python captures output and adds it to comparison
+
+👉 This allows combining:
+
+* Python flexibility
+* C++ performance
+
+---
+
+## 📊 Output Example
+
+| Algorithm         | Time (s) | Nodes Visited |
+| ----------------- | -------- | ------------- |
+| DP Classic        | 0.0109   | 521/522       |
+| ML Guided A*      | 6.61     | 267/522       |
+| DP + Greedy (C++) | 0.0006   | 500/522       |
+
+---
+
+## 🗺️ Visualization
+
+* 🔵 Blue → Optimal path
+* 🔴 Red → Halt points
+* 🟢 Green → Path nodes
+* ⚪ Grey → Full graph
+
+---
+
+## 🎯 Key Insight
+
+This project shows:
+
+> **Combining classical algorithms + machine learning + optimization techniques leads to powerful hybrid solutions.**
+
+---
+
+## ⚠️ Notes
+
+* Requires **Python 3.10+**
+* Requires **C++ compiler (g++)** for `.exe`
+* ML model is pre-trained (`rf_model.pkl`)
+
+---
+
+## 🚀 Future Improvements
+
+* Interactive zoomable map
+* Live path animation
+* Better heuristic models
+* Real road network integration
+
+---
+
+## 👨‍💻 Author
+
+Vivek Mishra
+BTech CSE – IIIT Nagpur
+
+---
+
+## ⭐ Final Thought
+
+This project bridges:
+
+```
+Theory (DP, A*)
++
+Optimization (Greedy Pruning)
++
+Machine Learning
++
+Real-world UI
+```
+
+👉 A complete **Hybrid Algorithm System**

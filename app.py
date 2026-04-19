@@ -10,7 +10,7 @@ from ML_A_star_Guided_Learning.ml_astar import solve as ml_solve
 
 st.title("Multistage Graph Optimization (Hybrid DP + ML A*)")
 
-# ---------- CITY LIST ----------
+# CITY LIST
 cities = [
     "Mumbai", "Pune", "Nagpur", "Nashik", "Aurangabad", "Solapur",
     "Kolhapur", "Amravati", "Jalgaon", "Latur", "Akola", "Dhule",
@@ -24,7 +24,7 @@ cities = [
     "Udgir", "Tuljapur", "Pusad", "Achalpur", "Malkapur"
 ]
 
-# ---------- GRAPH BUILD ----------
+#  GRAPH BUILD
 def build_city_graph(cities):
     import osmnx as ox
 
@@ -54,7 +54,7 @@ def build_city_graph(cities):
     return G
 
 
-# ---------- STAGE ASSIGN ----------
+#  STAGE ASSIGN
 def assign_stages(G, source):
     stage_map = nx.single_source_shortest_path_length(G, source)
 
@@ -64,7 +64,7 @@ def assign_stages(G, source):
     return G
 
 
-# ---------- C++ SOLVER ----------
+#  C++ SOLVER
 def run_cpp_solver(G, source, sink):
 
     stages = nx.get_node_attributes(G, "stage")
@@ -125,14 +125,14 @@ def run_cpp_solver(G, source, sink):
     }
 
 
-# ---------- VISUALIZATION ----------
+# VISUALIZATION
 def visualize_graph(G, path=None, halts=None):
 
     pos = nx.get_node_attributes(G, 'pos')
 
-    plt.figure(figsize=(16, 10))  # 👈 BIGGER
+    plt.figure(figsize=(16, 10)) 
 
-    # Draw base graph (light & thin)
+   
     nx.draw_networkx_edges(
         G,
         pos,
@@ -148,11 +148,11 @@ def visualize_graph(G, path=None, halts=None):
         node_color="skyblue"
     )
 
-    # Draw labels (BIGGER + clearer)
+   
     nx.draw_networkx_labels(
         G,
         pos,
-        font_size=8,   # 👈 increase (try 9–10 if needed)
+        font_size=8, 
         font_weight="bold"
     )
 
@@ -192,7 +192,7 @@ def visualize_graph(G, path=None, halts=None):
     st.pyplot(plt)
 
 
-# ---------- UI ----------
+# UI
 source_city = st.selectbox("Source City", cities)
 dest_city = st.selectbox("Destination City", cities)
 
@@ -200,7 +200,7 @@ halt_km = st.slider("Halt every (km)", 50, 300, 100)
 
 run_btn = st.button("Run Algorithms")
 
-# ---------- MAIN ----------
+# MAIN
 if run_btn:
 
     if source_city == dest_city:
@@ -229,7 +229,7 @@ if run_btn:
     if cpp_result:
         results.append(cpp_result)
 
-    # ---------- RESULTS ----------
+    #  RESULTS
     st.subheader("Algorithm Comparison")
 
     table = []
@@ -242,7 +242,7 @@ if run_btn:
 
     st.table(table)
 
-    # ---------- HALTS ----------
+    # HALTS
     st.subheader("Halts")
 
     path = ml_result["path"]
@@ -259,6 +259,6 @@ if run_btn:
 
     st.write("Halt Cities:", halts)
 
-    # ---------- VISUAL ----------
+    # VISUAL 
     st.subheader("Visualization")
     visualize_graph(G, path, halts)
