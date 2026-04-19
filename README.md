@@ -227,13 +227,6 @@ This project shows:
 
 ---
 
-## 👨‍💻 Author
-
-Vivek Mishra
-BTech CSE – IIIT Nagpur
-
----
-
 ## ⭐ Final Thought
 
 This project bridges:
